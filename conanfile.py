@@ -3,7 +3,7 @@ import os
 import json
 import stat
 
-CONAN_REPO = "https://github.com/db4/conan-opencv"
+CONAN_REPO = "https://github.com/roboteam/conan-opencv"
 OPENCV_REPO = "https://github.com/opencv/opencv.git"
 OPENCV_VERSION = "3.4.0"
 OPENCV_BRANCH = "tags/" + OPENCV_VERSION

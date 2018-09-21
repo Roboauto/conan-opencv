@@ -261,8 +261,10 @@ class OpenCVConan(ConanFile):
             else:
                 cpp_info = cmake_config_tools.cmake_find_package(
                     self, opencv_install_dir, "OpenCV", "share/OpenCV")
+
             # work around OpenCV problem (exclude external libs like tbb)
-            cpp_info["libs"] = [lib for lib in cpp_info["libs"]
+	    import re
+            cpp_info["libs"] = [re.sub("^:","",lib) for lib in cpp_info["libs"]
                                 if not lib in OPENCV_CONAN_PKG]
             cpp_info["bindirs"] = [os.path.join(
                 os.path.dirname(cpp_info["libdirs"][0]), "bin")]
@@ -279,3 +281,4 @@ class OpenCVConan(ConanFile):
         self.cpp_info.bindirs.extend(cpp_info["bindirs"])
         self.env_info.path.extend(
             [os.path.join(self.package_folder, bin_dir) for bin_dir in cpp_info["bindirs"]])
+

@@ -12,7 +12,7 @@ OPENCV_CONAN_PKG = {
     # name, conan package, optional attribute list
     "jasper": ("jasper/2.0.14@conan/stable",),
     "jpeg": ("libjpeg/9b@bincrafters/stable",),
-    "png": ("libpng/1.6.34@bincrafters/stable",),
+    #"png": ("libpng/1.6.34@bincrafters/stable",),
     "tiff": ("libtiff/4.0.8@bincrafters/stable",),
     "zlib": ("zlib/1.2.11@conan/stable",),
     "webp": ("libwebp/0.6.1@bincrafters/stable",),
@@ -127,7 +127,7 @@ OPENCV_BUILD_OPTIONS = [
     ("with_openni", "bool"),
     ("with_openni2", "bool"),
     ("with_openvx", "bool"),
-    ("with_png", "bool"),
+    ("with_png", "bool", True),
     ("with_pvapi", "bool"),
     ("with_qt", "bool"),
     ("with_tbb", "bool"),
@@ -196,6 +196,9 @@ class OpenCVConan(ConanFile):
     def build(self):
         cmake = CMake(self)
         cmake_options = {}
+
+        with open("/home/robo/.conan/data/OpenCV/3.4.0/roboauto/stable/source/opencv/3rdparty/libpng/CMakeLists.txt", "a") as myfile:
+            myfile.write("add_definitions(-DPNG_ARM_NEON_OPT=0)\n")
 
         cmake_options["CMAKE_INCLUDE_PATH"] = ";".join(
             self.deps_cpp_info.include_paths)

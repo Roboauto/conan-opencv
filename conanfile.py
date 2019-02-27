@@ -194,11 +194,12 @@ class OpenCVConan(ConanFile):
         self.run("cd opencv && git checkout " + OPENCV_BRANCH)
 
     def build(self):
+        cmakeFile = os.path.join(self.source_folder, "opencv/3rdparty/libpng/CMakeLists.txt")
+        with open(cmakeFile, "a") as myfile:
+            myfile.write("add_definitions(-DPNG_ARM_NEON_OPT=0)\n")
+
         cmake = CMake(self)
         cmake_options = {}
-
-        with open("/home/robo/.conan/data/OpenCV/3.4.0/roboauto/stable/source/opencv/3rdparty/libpng/CMakeLists.txt", "a") as myfile:
-            myfile.write("add_definitions(-DPNG_ARM_NEON_OPT=0)\n")
 
         cmake_options["CMAKE_INCLUDE_PATH"] = ";".join(
             self.deps_cpp_info.include_paths)

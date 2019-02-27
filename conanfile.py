@@ -33,7 +33,7 @@ OPENCV_BUILD_OPTIONS = [
     ("build_openexr", "bool"),
     # ("build_package", "bool"),
     ("build_perf_tests", "bool", False),
-    ("build_png", "bool"),
+    ("build_png", "bool", True),
     ("build_protobuf", "bool"),
     # ("build_shared_libs", "bool"),
     ("build_tbb", "bool"),

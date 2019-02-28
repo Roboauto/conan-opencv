@@ -267,7 +267,7 @@ class OpenCVConan(ConanFile):
                     self, opencv_install_dir, "OpenCV", "share/OpenCV")
 
             # work around OpenCV problem (exclude external libs like tbb)
-	    import re
+            import re
             cpp_info["libs"] = [re.sub("^:","",lib) for lib in cpp_info["libs"]
                                 if not lib in OPENCV_CONAN_PKG]
             cpp_info["bindirs"] = [os.path.join(
